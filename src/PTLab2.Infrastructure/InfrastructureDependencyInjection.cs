@@ -19,6 +19,7 @@ public static class InfrastructureDependencyInjection
 
         services.AddTransient<IProductRepository, ProductRepository>();
         services.AddTransient<IPurchaseRepository, PurchaseRepository>();
+        services.AddTransient<IPromoCodeRepository, PromoCodeRepository>();
 
         return services;
     }

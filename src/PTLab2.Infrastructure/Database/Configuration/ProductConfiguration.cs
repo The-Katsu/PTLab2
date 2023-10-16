@@ -25,9 +25,9 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
 
         builder.HasData(new[] 
         {
-            new Product { Id = 1, Name = "Стол", Price = 2000 },
-            new Product { Id = 2, Name = "Стул", Price = 1000 },
-            new Product { Id = 3, Name = "Табурет", Price = 500 }
+            new Product { Id = 1, Name = "Детская игрушка №1", Price = 2000 },
+            new Product { Id = 2, Name = "Детская игрушка №2", Price = 1000 },
+            new Product { Id = 3, Name = "Детская игрушка №3", Price = 500 }
         });
     }
 }

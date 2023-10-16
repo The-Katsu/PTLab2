@@ -2,6 +2,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PTLab2.Application.Products.Get;
+using PTLab2.Application.Products.GetById;
+using PTLab2.Application.Promocodes.GetByCode;
 using PTLab2.Application.Purchases.Buy;
 using PTLab2.Spa.Models;
 
@@ -29,9 +31,11 @@ public class HomeController : Controller
     }
 
     [HttpGet]
-    public IActionResult Buy(int id)
+    public async Task<IActionResult> Buy(int id)
     {
-        ViewBag.ProductId = id;
+        var command = new GetProductByIdCommand(id);
+        var result = await _sender.Send(command);
+        ViewBag.Product = result;
         return View();
     }
 
@@ -40,6 +44,19 @@ public class HomeController : Controller
     {
         await _sender.Send(command);
         return "Спасибо за покупку, " + command.Person + "!";
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> ApplyPromoCode(string promoCode, int price)
+    {
+        var command = new GetPromoCodeByCodeCommand(promoCode);
+        
+        try{
+            var result = await _sender.Send(command);
+            return Json(new { Message = "Промокод активирован", NewPrice = price * ((100 - result.Discount)/100.0), Sucess = true });
+        } catch (Exception ex) {
+            return Json(new { Message = ex.Message, NewPrice = price, Sucess = false });
+        }
     }
 
     public IActionResult Privacy()

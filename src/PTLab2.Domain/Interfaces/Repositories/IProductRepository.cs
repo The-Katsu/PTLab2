@@ -5,4 +5,5 @@ namespace PTLab2.Domain.Interfaces.Repositories;
 public interface IProductRepository 
 {
     public Task<IEnumerable<Product>> GetProductsAsync();
+    public Task<Product?> GetProductByIdAsync(int id);
 }

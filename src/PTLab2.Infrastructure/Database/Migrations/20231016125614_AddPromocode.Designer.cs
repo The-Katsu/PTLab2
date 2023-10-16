@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PTLab2.Infrastructure.Database;
@@ -11,9 +12,10 @@ using PTLab2.Infrastructure.Database;
 namespace PTLab2.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
-    partial class ShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231016125614_AddPromocode")]
+    partial class AddPromocode
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,50 +62,6 @@ namespace PTLab2.Infrastructure.Database.Migrations
                             Id = 3,
                             Name = "Детская игрушка №3",
                             Price = 500
-                        });
-                });
-
-            modelBuilder.Entity("PTLab2.Domain.Entities.PromoCode", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<int>("Discount")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Discount")
-                        .IsUnique();
-
-                    b.ToTable("PromoCodes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Code = "5sale",
-                            Discount = 5
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Code = "10sale",
-                            Discount = 10
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Code = "15sale",
-                            Discount = 15
                         });
                 });
 

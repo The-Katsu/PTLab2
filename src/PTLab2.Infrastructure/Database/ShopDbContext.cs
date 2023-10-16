@@ -10,11 +10,13 @@ public class ShopDbContext : DbContext
 
     public DbSet<Product> Products {get;set;} = null!;
     public DbSet<Purchase> Purchases {get;set;} = null!;
+    public DbSet<PromoCode> PromoCodes {get;set;} = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new ProductConfiguration());
         modelBuilder.ApplyConfiguration(new PurchaseConfiguration());
+        modelBuilder.ApplyConfiguration(new PromoCodeConfiguration());
         base.OnModelCreating(modelBuilder);
     }
 }

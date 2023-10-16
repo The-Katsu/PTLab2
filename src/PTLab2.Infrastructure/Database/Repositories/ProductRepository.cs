@@ -14,6 +14,11 @@ public class ProductRepository : IProductRepository
         _dbContext = dbContext;
     }
 
+    public async Task<Product?> GetProductByIdAsync(int id)
+    {
+        return await _dbContext.Products.FindAsync(id);
+    }
+
     public async Task<IEnumerable<Product>> GetProductsAsync()
     {
         return await _dbContext.Products.ToListAsync();

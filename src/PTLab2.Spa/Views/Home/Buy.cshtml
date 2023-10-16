@@ -6,12 +6,13 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Покупка</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery -->
 </head>
 <body>
     <div>
-        <h3>Покупка</h3>
+        <h3>Покупка "@ViewBag.Product.Name"</h3>
         <form method="post">
-            <input type="hidden" value="@ViewBag.ProductId" name="ProductID" />
+            <input type="hidden" value="@ViewBag.Product.Id" name="ProductID" />
             <table>
                 <tr>
                     <td><p>Введите свое имя </p></td>
@@ -23,9 +24,39 @@
                         <input type="text" name="Address" />
                     </td>
                 </tr>
-                <tr><td><input type="submit" value="Отправить" /> </td><td></td></tr>
+                <tr>
+                    <td><p id="productPrice">Цена: @ViewBag.Product.Price</p></td>
+                </tr>
+                <tr>
+                    <td><p>Промо-код:</p></td>
+                    <td>
+                        <input id="promoCode" type="text" name="PromoCode" />
+                    </td>
+                </tr>
+                <tr>
+                <td><input type="button" value="Применить" onclick="applyPromoCode()" /></td>
+                <td></td>
+                </tr>
+                <tr><td><input type="submit" name="buy" value="Отправить" /> </td><td></td></tr>
             </table>
         </form>
+        <div id="updatedPrice"></div>
     </div>
+
+    <script type="text/javascript">
+        function applyPromoCode() {
+            var promoCode = $("#promoCode").val();
+            var price = "@ViewBag.Product.Price"; 
+            var data = {
+                promoCode: promoCode,
+                price: price
+            };
+
+            $.post("/Home/ApplyPromoCode", data, function (result) {
+                $("#updatedPrice").html(result.message);
+                $("#productPrice").text("Цена: " + result.newPrice);
+            });
+        }
+    </script>
 </body>
 </html>
