@@ -53,9 +53,9 @@ public class HomeController : Controller
         
         try{
             var result = await _sender.Send(command);
-            return Json(new { Message = "Промокод активирован", NewPrice = price * ((100 - result.Discount)/100.0), Sucess = true });
+            return Json(new { Message = "Промокод активирован", NewPrice = price * ((100 - result.Discount)/100.0), Success = true });
         } catch (Exception ex) {
-            return Json(new { Message = ex.Message, NewPrice = price, Sucess = false });
+            return Json(new { Message = ex.Message, NewPrice = price, Success = false });
         }
     }
 
