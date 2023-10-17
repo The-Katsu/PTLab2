@@ -5,11 +5,11 @@ using PTLab2.Infrastructure.Database.Repositories;
 using PTLab2.Tests.Common;
 
 namespace PTLab2.Tests.PromoCodes;
-public class PromoCodeRepositoryRest : TestBase
+public class PromoCodeRepositoryTest : TestBase
 {
     private readonly IPromoCodeRepository _promoCodeRepository;
 
-    public PromoCodeRepositoryRest()
+    public PromoCodeRepositoryTest()
     {
         _promoCodeRepository = new PromoCodeRepository(ShopDbContext);
     }
